@@ -12,8 +12,7 @@ function float(value:string):number {
 
 export class Literal{
     constructor(type:string, value:string){
-        if (!this[type]) throw new Error(type + ': Not implemented');
-        let result = this[type](value);
+        let result = (this[type] || (_ => _))(value);
         this.valueOf = () => result;
     }
     static convert(type:string, value:string):any {
